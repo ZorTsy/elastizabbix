@@ -15,6 +15,12 @@ stats = {
     'health' : 'http://localhost:9200/_cluster/health'
 }
 
+def exception_handler(exception_type, exception, traceback, debug_hook=sys.excepthook):
+    #print "%s: %s" % (exception_type.__name__, exception)
+    print 'ZBX_NOTSUPPORTED'
+
+sys.excepthook = exception_handler
+
 def created_file(name):
     try:
         fd = os.open(name, os.O_WRONLY | os.O_CREAT | os.O_EXCL)
@@ -87,6 +93,6 @@ if __name__ == '__main__':
     else:
         stat = get_stat(api, stat)
         if isinstance(stat, dict):
-            print ''
+            print 'ZBX_NOTSUPPORTED'
         else:
             print stat
