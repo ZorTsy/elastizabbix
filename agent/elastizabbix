@@ -21,8 +21,11 @@ stats = {
 }
 
 def exception_handler(exception_type, exception, traceback, debug_hook=sys.excepthook):
-    #print "%s: %s" % (exception_type.__name__, exception)
-    print 'ZBX_NOTSUPPORTED'
+    if sys.argv[2] == 'reachable':
+        print '0'
+    else:
+        #print "%s: %s" % (exception_type.__name__, exception)
+        print 'ZBX_NOTSUPPORTED'
 
 sys.excepthook = exception_handler
 
@@ -99,6 +102,9 @@ if __name__ == '__main__':
     else:
         stat = get_stat(api, stat)
         if isinstance(stat, dict):
-            print 'ZBX_NOTSUPPORTED'
+            if sys.argv[2] == 'reachable':
+                print '1'
+            else:
+                print 'ZBX_NOTSUPPORTED'
         else:
             print stat
