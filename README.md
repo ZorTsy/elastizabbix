@@ -1,6 +1,8 @@
 # elastizabbix
 Down and dirty elastic / elasticsearch monitoring plugin for zabbix
 
+> Forked from: https://github.com/mkhpalm/elastizabbix
+
 ## Features:
 
 - Stats cache to avoid saturating nodes with monitoring requests
@@ -11,20 +13,23 @@ Down and dirty elastic / elasticsearch monitoring plugin for zabbix
 ## Requirements
 
  - Python 2/3 on an elastic node with zabbix agent installed
+	 - or you can install on your Zabbix server and set up the remote URL to be monitored
 
 ## Installation
 
-This only needs to be setup on one of the elasticsearch nodes
+This only needs to be setup on one of the elasticsearch nodes or on the Zabbix server
 
 #### Zabbix Agent
 
 - Copy elastizabbix to agent scripts folder
 - Copy elastizabbix.conf to conf.d or add UserParameter to your agent config
+- Restart the Zabbix Agent
 
 #### Zabbix Frontend
 
-- Import the XML template (supports zabbix 2.4 and greater)
+- Import the XML template (tested on Zabbix 3.0)
 - Add node to the newly imported template
+- Change the node macro `{$ES.CLUSTER.URL}` to your cluster address `http://localhost:9200`
 
 ## The MIT License (MIT)
 
